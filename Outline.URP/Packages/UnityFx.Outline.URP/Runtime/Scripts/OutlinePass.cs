@@ -36,7 +36,8 @@ namespace UnityFx.Outline.URP
 				_shaderTagIdList.Add(new ShaderTagId("UniversalForward"));
 				_shaderTagIdList.Add(new ShaderTagId("LightweightForward"));
 				_shaderTagIdList.Add(new ShaderTagId("SRPDefaultUnlit"));
-			}
+				_shaderTagIdList.Add(new ShaderTagId("Universal2D"));
+			}  
 		}
 
 		public void Setup(ScriptableRenderer renderer)
@@ -60,7 +61,6 @@ namespace UnityFx.Outline.URP
 				var drawingSettings = CreateDrawingSettings(_shaderTagIdList, ref renderingData, sortingCriteria);
 
 				drawingSettings.enableDynamicBatching = true;
-				drawingSettings.overrideMaterial = outlineResources.RenderMaterial;
 
 				if (outlineSettings.IsAlphaTestingEnabled())
 				{
@@ -69,6 +69,7 @@ namespace UnityFx.Outline.URP
 				}
 				else
 				{
+					drawingSettings.overrideMaterial = outlineResources.RenderMaterial;
 					drawingSettings.overrideMaterialPassIndex = OutlineResources.RenderShaderDefaultPassId;
 				}
 

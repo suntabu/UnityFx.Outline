@@ -31,6 +31,8 @@ Shader "Libii/URP/URP_2D_Texture_Outline"
         ZTest LEqual
         Pass
         {
+            Name "Albedo"
+
             Tags
             {
                 "LightMode" = "Universal2D"
@@ -115,14 +117,6 @@ Shader "Libii/URP/URP_2D_Texture_Outline"
 
                 InitializeSurfaceData(main.rgb, main.a, mask, surfaceData);
                 InitializeInputData(i.uv, i.lightingUV, inputData);
-
-                float3 c = surfaceData.albedo;
-
-                if (c.r + c.g + c.b < 0.3)
-                {
-                    surfaceData.alpha = 0;
-                    surfaceData.albedo = float3(0, 0, 0);
-                }
                 return CombinedShapeLightShared(surfaceData, inputData);
             }
             ENDHLSL
@@ -132,7 +126,10 @@ Shader "Libii/URP/URP_2D_Texture_Outline"
         Pass
         {
             Name "Transparent"
-
+   Tags
+            {
+                "LightMode" = "CustomOutline"
+            }
             HLSLINCLUDE
             #include "Packages/com.unity.render-pipelines.universal/Shaders/PostProcessing/Common.hlsl"
 

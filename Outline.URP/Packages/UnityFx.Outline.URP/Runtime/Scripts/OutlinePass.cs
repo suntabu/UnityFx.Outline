@@ -36,8 +36,8 @@ namespace UnityFx.Outline.URP
 				_shaderTagIdList.Add(new ShaderTagId("UniversalForward"));
 				_shaderTagIdList.Add(new ShaderTagId("LightweightForward"));
 				_shaderTagIdList.Add(new ShaderTagId("SRPDefaultUnlit"));
-				_shaderTagIdList.Add(new ShaderTagId("Universal2D"));
-			}  
+				_shaderTagIdList.Add(new ShaderTagId("CustomOutline"));
+			}
 		}
 
 		public void Setup(ScriptableRenderer renderer)
@@ -66,6 +66,7 @@ namespace UnityFx.Outline.URP
 				{
 					drawingSettings.overrideMaterialPassIndex = OutlineResources.RenderShaderAlphaTestPassId;
 					cmd.SetGlobalFloat(outlineResources.AlphaCutoffId, outlineSettings.OutlineAlphaCutoff);
+
 				}
 				else
 				{
